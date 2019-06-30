@@ -14,6 +14,7 @@ logger = logging.getLogger(__name__)
 
 # Get a new dictionary on every launch
 file = open("dict.csv","r")
+next(file)
 data = {}
 for line in file:
   item = line.split(',')
