@@ -3,7 +3,7 @@ import requests
 import logging
 from uuid import uuid4
 
-from telegram import InlineQueryResultAudio, InlineQueryResultVoice, ParseMode, InputTextMessageContent
+from telegram import InlineQueryResultVoice, ParseMode, InputTextMessageContent
 from telegram.ext import Updater, InlineQueryHandler, CommandHandler
 from telegram.utils.helpers import escape_markdown
 
@@ -45,7 +45,7 @@ def inlinequery(update, context):
     audio_names, titles = get_audio_names(query)
 
     results = [
-      InlineQueryResultAudio(id=str(uuid4()),
+      InlineQueryResultVoice(id=str(uuid4()),
         voice_url=f'https://raw.githubusercontent.com/tiulpin/tg-fargusbot/master/mp3/{audio_name}.mp3',
         title=title) for audio_name, title in zip(*get_audio_names(query))]
 
