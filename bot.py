@@ -51,7 +51,7 @@ def inlinequery(update, context):
       title=query
     )
 
-    update.inline_query.answer([answer])
+    update.inline_query.answer([answer, answer, answer])
 
 
 def main():
