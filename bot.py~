@@ -42,19 +42,19 @@ def help(update, context):
     """)
 
 
-def transform_answer(result):
+def transform_answer(audio, query):
     return InlineQueryResultAudio(
       id=str(uuid4()),
-      audio_url=result['audio'],
-      title=result['text']
+      audio_url=audio,
+      title=query
     )
 
 
 def inlinequery(update, context):
     query = update.inline_query.query
     audio = get_audio(query)
-    result = {'text': query, 'audio': audio}
-    results = map(transform_answer, result)
+
+    results = map(transform_answer(audio, query), query)
     update.inline_query.answer(results)
 
 
