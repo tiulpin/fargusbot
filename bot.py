@@ -3,7 +3,11 @@ import requests
 import logging
 from uuid import uuid4
 
+<<<<<<< HEAD
 from telegram import InlineQueryResultAudio, InlineQueryResultVoice, ParseMode, InputTextMessageContent
+=======
+from telegram import InlineQueryResultVoice, ParseMode, InputTextMessageContent
+>>>>>>> f9407672c887867be140bfb544c3366cab306c8c
 from telegram.ext import Updater, InlineQueryHandler, CommandHandler
 from telegram.utils.helpers import escape_markdown
 import numpy as np
@@ -43,6 +47,7 @@ def help(update, context):
 
 def inlinequery(update, context):
     query = update.inline_query.query
+<<<<<<< HEAD
     audio_names, titles = get_audio_names(query)
 
     results = [
@@ -50,6 +55,20 @@ def inlinequery(update, context):
         voice_url=f'https://raw.githubusercontent.com/tiulpin/tg-fargusbot/master/mp3/{audio_name}.mp3',
         title=title) for audio_name, title in get_audio_names(query)]
 
+=======
+    
+    results = [
+      InlineQueryResultVoice(
+        id=str(uuid4()),
+        title=query,
+        voice_url=f'https://raw.githubusercontent.com/tiulpin/tg-fargusbot/master/mp3/{get_audio_name(query)}.mp3'
+      ), 
+      InlineQueryResultVoice(
+        id=str(uuid4()),
+        title=query + '_123',
+        voice_url=f'https://raw.githubusercontent.com/tiulpin/tg-fargusbot/master/mp3/{get_audio_name(query)}.mp3'
+      )]
+>>>>>>> f9407672c887867be140bfb544c3366cab306c8c
     update.inline_query.answer(results)
 
 
