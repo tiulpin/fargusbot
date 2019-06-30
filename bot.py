@@ -17,14 +17,14 @@ file = open("dict.csv","r")
 data = {}
 for line in file:
   item = line.split(',')
-  data[f'mp3/{item[0]}.mp3'] = item[1]
+  data[item[0]] = item[1]
 
 
-def get_audio(query):
-  path = next((filename for filename, text in data.items() if text.startswith(query)), None)
-  if not path:
-    path = 'mp3/INTRO4.mp3'
-  return path
+def get_audio_name(query):
+  name = next((filename for filename, text in data.items() if text.startswith(query)), None)
+  if not name:
+    name = 'INTRO4'
+  return name
 
 # Define a few command handlers
 def error(update, context):
@@ -41,20 +41,16 @@ def help(update, context):
     """)
 
 
-def transform_answer(result):
-    return InlineQueryResultAudio(
-      id=str(uuid4()),
-      audio_url='mp3/INTRO4.mp3',
-      title='test'
-    )
-
-
 def inlinequery(update, context):
     query = update.inline_query.query
-    audio_url = get_audio(query)
-    result = {'text': query, 'audio': audio_url}
-    results = map(transform_answer, result)
-    update.inline_query.answer(results)
+
+    answer = InlineQueryResultAudio(
+      id=str(uuid4()),
+      audio_url=f'https://raw.githubusercontent.com/tiulpin/tg-fargusbot/master/mp3/{get_audio_name(query)}.mp3',
+      title=query
+    )
+
+    update.inline_query.answer(answer)
 
 
 def main():
