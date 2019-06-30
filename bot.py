@@ -3,7 +3,7 @@ import requests
 import logging
 from uuid import uuid4
 
-from telegram import Audio, Voice, InlineQueryResultAudio, ParseMode, InputTextMessageContent
+from telegram import InlineQueryResultVoice, ParseMode, InputTextMessageContent
 from telegram.ext import Updater, InlineQueryHandler, CommandHandler
 from telegram.utils.helpers import escape_markdown
 
@@ -44,17 +44,17 @@ def help(update, context):
 
 def inlinequery(update, context):
     query = update.inline_query.query
-
+    
     results = [
-      InlineQueryResultAudio(
+      InlineQueryResultVoice(
         id=str(uuid4()),
-        audio_url=f'https://raw.githubusercontent.com/tiulpin/tg-fargusbot/master/mp3/{get_audio_name(query)}.mp3',
-        title=query
+        title=query,
+        voice_url=f'https://raw.githubusercontent.com/tiulpin/tg-fargusbot/master/mp3/{get_audio_name(query)}.mp3'
       ), 
-      InlineQueryResultAudio(
+      InlineQueryResultVoice(
         id=str(uuid4()),
-        audio_url=f'https://raw.githubusercontent.com/tiulpin/tg-fargusbot/master/mp3/{get_audio_name(query)}.mp3',
-        title=query + '_123'
+        title=query + '_123',
+        voice_url=f'https://raw.githubusercontent.com/tiulpin/tg-fargusbot/master/mp3/{get_audio_name(query)}.mp3'
       )]
     update.inline_query.answer(results)
 
