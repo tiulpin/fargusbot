@@ -3,9 +3,10 @@ import requests
 import logging
 from uuid import uuid4
 
-from telegram import Audio, Voice, InlineQueryResultAudio, ParseMode, InputTextMessageContent
+from telegram import InlineQueryResultAudio, InlineQueryResultVoice, ParseMode, InputTextMessageContent
 from telegram.ext import Updater, InlineQueryHandler, CommandHandler
 from telegram.utils.helpers import escape_markdown
+import numpy as np
 
 
 # Enable logging
@@ -21,11 +22,9 @@ for line in file:
   data[item[0]] = item[1]
 
 
-def get_audio_name(query):
-  name = next((filename for filename, text in data.items() if text.startswith(query)), None)
-  if not name:
-    name = 'INTRO4'
-  return name
+def get_audio_names(query):
+  result = list(filter(lambda key: data[key].find(query) != -1, data.keys()))[:10]
+  return result, [data[key][:-1] for key in result]
 
 # Define a few command handlers
 def error(update, context):
@@ -44,18 +43,13 @@ def help(update, context):
 
 def inlinequery(update, context):
     query = update.inline_query.query
+    audio_names, titles = get_audio_names(query)
 
     results = [
-      InlineQueryResultAudio(
-        id=str(uuid4()),
-        audio_url=f'https://raw.githubusercontent.com/tiulpin/tg-fargusbot/master/mp3/{get_audio_name(query)}.mp3',
-        title=query
-      ), 
-      InlineQueryResultAudio(
-        id=str(uuid4()),
-        audio_url=f'https://raw.githubusercontent.com/tiulpin/tg-fargusbot/master/mp3/{get_audio_name(query)}.mp3',
-        title=query + '_123'
-      )]
+      InlineQueryResultAudio(id=str(uuid4()),
+        voice_url=f'https://raw.githubusercontent.com/tiulpin/tg-fargusbot/master/mp3/{audio_name}.mp3',
+        title=title) for audio_name, title in get_audio_names(query)]
+
     update.inline_query.answer(results)
 
 
