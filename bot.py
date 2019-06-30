@@ -54,7 +54,7 @@ def inlinequery(update, context):
     query = update.inline_query.query
     audio = get_audio(query)
 
-    results = transform_answer(audio, query)
+    results = map(transform_answer(audio, query), query)
     update.inline_query.answer(results)
 
 
