@@ -44,8 +44,8 @@ def help(update, context):
 def transform_answer(result):
     return InlineQueryResultAudio(
       id=str(uuid4()),
-      audio_url='mp3/INTRO4.mp3',
-      title='test'
+      audio_url=result['audio'],
+      title=result['text']
     )
 
 
