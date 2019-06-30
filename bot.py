@@ -45,14 +45,18 @@ def help(update, context):
 def inlinequery(update, context):
     query = update.inline_query.query
 
-    answer = InlineQueryResultAudio(
-      id=str(uuid4()),
-      audio_url=f'https://raw.githubusercontent.com/tiulpin/tg-fargusbot/master/mp3/{get_audio_name(query)}.mp3',
-      title=query
-    )
-
-    update.inline_query.answer([answer])
-    update.inline_query.answer([answer])
+    results = [
+      InlineQueryResultAudio(
+        id=str(uuid4()),
+        audio_url=f'https://raw.githubusercontent.com/tiulpin/tg-fargusbot/master/mp3/{get_audio_name(query)}.mp3',
+        title=query
+      ), 
+      InlineQueryResultAudio(
+        id=str(uuid4()),
+        audio_url=f'https://raw.githubusercontent.com/tiulpin/tg-fargusbot/master/mp3/{get_audio_name(query)}.mp3',
+        title=query + '_123'
+      )]
+    update.inline_query.answer(results)
 
 
 def main():
