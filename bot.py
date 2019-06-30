@@ -6,7 +6,6 @@ from uuid import uuid4
 from telegram import InlineQueryResultAudio, InlineQueryResultVoice, ParseMode, InputTextMessageContent
 from telegram.ext import Updater, InlineQueryHandler, CommandHandler
 from telegram.utils.helpers import escape_markdown
-import numpy as np
 
 
 # Enable logging
