@@ -51,7 +51,7 @@ def inlinequery(update, context):
       title=query
     )
 
-    update.inline_query.answer([answer, answer, answer])
+    update.inline_query.answer([answer])
 
 
 def main():
@@ -61,6 +61,7 @@ def main():
     dp.add_error_handler(error)
     dp.add_handler(CommandHandler("start", start))
     dp.add_handler(CommandHandler("help", help))
+    dp.add_handler(InlineQueryHandler(inlinequery))
     dp.add_handler(InlineQueryHandler(inlinequery))
 
     updater.start_polling()
