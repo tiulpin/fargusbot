@@ -3,7 +3,7 @@ import requests
 import logging
 from uuid import uuid4
 
-from telegram import InlineQueryResultArticle, ParseMode, InputTextMessageContent
+from telegram import Audio, Voice, InlineQueryResultAudio, ParseMode, InputTextMessageContent
 from telegram.ext import Updater, InlineQueryHandler, CommandHandler
 from telegram.utils.helpers import escape_markdown
 
@@ -12,6 +12,20 @@ from telegram.utils.helpers import escape_markdown
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.WARNING)
 logger = logging.getLogger(__name__)
 
+# Get a new dictionary on every launch
+file = open("dict.csv","r")
+data = {}
+for line in file:
+  item = line.split(',')
+  data[f'mp3/{item[0]}.mp3'] = item[1]
+
+
+def get_audio(query):
+  path = next((filename for filename, text in data.items() if text.startswith(query)), None)
+  if not path:
+    path = 'mp3/INTRO4.mp3'
+  audio = open(path, 'rb') 
+  return audio
 
 # Define a few command handlers
 def error(update, context):
@@ -19,58 +33,28 @@ def error(update, context):
 
 
 def start(update, context):
-    update.message.reply_text('This bot operates similar to the @wiki bot. Type the bot\'s name, then type your search terms.')
+    update.message.reply_text('черт фил ты пьешь эту гадость тебе не надо было это пить')
 
 
 def help(update, context):
     update.message.reply_text("""
-    The bot uses the \'wbsearchentities\' module of the Wikibase MediaWiki API extension.\
-    Type \'-l\' or \'-q\' before your search terms to search for lexeme or property.
+    ...
     """)
 
 
-def transform_query(query):
-    type_ = 'item'
-    flag = query[:1]
-    if flag=='-':
-        flag=query[:3]
-        if flag == '-l ':
-            type_ = 'lexeme'
-            query = query[3:]
-        if flag == '-p ':
-            type_ = 'property'
-            query = query[3:]
-        if flag == '-q ':
-            type_ = 'item'
-            query = query[3:]        
-    return dict(
-        action='wbsearchentities',
-        format='json',
-        language='en',
-        uselang='en',
-        type=type_,
-        search=query
-    )
-
-
-def transform_answer(json_result):
-    return InlineQueryResultArticle(
-        id=uuid4(),
-        title = json_result['label']  + ' (' + json_result['match']['text'] + ')',
-        description = json_result.get('description'),
-        url = json_result['concepturi'],
-        input_message_content=InputTextMessageContent(json_result['concepturi'], parse_mode=ParseMode.HTML)
+def transform_answer(audio, query):
+    return InlineQueryResultAudio(
+      id=str(uuid4()),
+      audio_url=audio,
+      title=query
     )
 
 
 def inlinequery(update, context):
     query = update.inline_query.query
-    url = 'https://www.wikidata.org/w/api.php?'
+    audio = get_audio(query)
 
-    response = requests.get(url=url, params=transform_query(query)).json() 
-    json_results = response.get('search')
-
-    results = map(transform_answer, json_results) if json_results is not None else []
+    results = transform_answer(audio, query)
     update.inline_query.answer(results)
 
 
