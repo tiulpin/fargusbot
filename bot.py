@@ -24,8 +24,7 @@ def get_audio(query):
   path = next((filename for filename, text in data.items() if text.startswith(query)), None)
   if not path:
     path = 'mp3/INTRO4.mp3'
-  audio = open(path, 'rb') 
-  return audio
+  return path
 
 # Define a few command handlers
 def error(update, context):
@@ -52,8 +51,8 @@ def transform_answer(result):
 
 def inlinequery(update, context):
     query = update.inline_query.query
-    audio = get_audio(query)
-    result = {'text': query, 'audio': audio}
+    audio_url = get_audio(query)
+    result = {'text': query, 'audio': audio_url}
     results = map(transform_answer, result)
     update.inline_query.answer(results)
 
