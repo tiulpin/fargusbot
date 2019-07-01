@@ -46,7 +46,7 @@ def inlinequery(update, context):
 
     results = [
       InlineQueryResultVoice(id=str(uuid4()),
-        voice_url=f'https://raw.githubusercontent.com/tiulpin/tg-fargusbot/master/mp3/{audio_name}.mp3',
+        voice_url=f'https://raw.githubusercontent.com/tiulpin/tg-fargusbot/master/opus/{audio_name}.opus',
         title=title) for audio_name, title in zip(*get_audio_names(query))]
 
     update.inline_query.answer(results)
