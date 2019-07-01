@@ -5,4 +5,4 @@ The only one Vice City FARGUS-talking bot, inline-mode only!
 Start using it with ```@fargusbot``` in the begining of message
 
 ### Issues
-Find mistakes in our dataset (https://github.com/tiulpin/tg-fargusbot/blob/master/dict.csv) and post an issue, thanks!
+Find mistakes in our <a href="https://github.com/tiulpin/tg-fargusbot/blob/master/dict.csv">dataset</a> and post an issue, thanks!
