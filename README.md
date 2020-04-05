@@ -1,6 +1,6 @@
 # :trumpet: FARGUS Telegram bot 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 The only one Vice City FARGUS-talking bot, inline-mode only!
 
@@ -20,6 +20,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <table>
   <tr>
     <td align="center"><a href="https://github.com/apat1n"><img src="https://avatars1.githubusercontent.com/u/20491392?v=4" width="100px;" alt=""/><br /><sub><b>apat1n</b></sub></a><br /><a href="https://github.com/1push/telegram-fargusbot/commits?author=apat1n" title="Code">💻</a> <a href="https://github.com/1push/telegram-fargusbot/pulls?q=is%3Apr+reviewed-by%3Aapat1n" title="Reviewed Pull Requests">👀</a></td>
+    <td align="center"><a href="https://tiulp.in/"><img src="https://avatars2.githubusercontent.com/u/13538286?v=4" width="100px;" alt=""/><br /><sub><b>tiulpin</b></sub></a><br /><a href="https://github.com/1push/telegram-fargusbot/commits?author=tiulpin" title="Code">💻</a> <a href="#infra-tiulpin" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="#maintenance-tiulpin" title="Maintenance">🚧</a></td>
   </tr>
 </table>
 

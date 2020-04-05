@@ -14,6 +14,17 @@
         "code",
         "review"
       ]
+    },
+    {
+      "login": "tiulpin",
+      "name": "tiulpin",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/13538286?v=4",
+      "profile": "https://tiulp.in/",
+      "contributions": [
+        "code",
+        "infra",
+        "maintenance"
+      ]
     }
   ],
   "contributorsPerLine": 7,
