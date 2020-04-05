@@ -1,0 +1,25 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "apat1n",
+      "name": "apat1n",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/20491392?v=4",
+      "profile": "https://github.com/apat1n",
+      "contributions": [
+        "code",
+        "review"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "telegram-fargusbot",
+  "projectOwner": "1push",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
