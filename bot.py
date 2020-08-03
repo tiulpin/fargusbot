@@ -1,11 +1,9 @@
 import os
-import requests
 import logging
 from uuid import uuid4
 
-from telegram import InlineQueryResultVoice, ParseMode, InputTextMessageContent
+from telegram import InlineQueryResultVoice
 from telegram.ext import Updater, InlineQueryHandler, CommandHandler
-from telegram.utils.helpers import escape_markdown
 
 
 # Enable logging
